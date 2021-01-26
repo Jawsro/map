@@ -1,0 +1,25 @@
+/* pages/login/login.wxss */
+.container{
+  padding: 40rpx;
+}
+.user,.password{
+  display: flex;
+  padding: 20rpx 0;
+}
+.password label{
+  letter-spacing: 2rpx;
+}
+label{
+  width:180rpx;
+  font-size: 28rpx;
+}
+input{
+  flex: 1;
+  border: 1px solid #1AAD19;
+  font-size: 28rpx;
+  padding:4rpx 10rpx;
+}
+ 
+.button{
+  margin-top: 60rpx;
+}

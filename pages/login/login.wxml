@@ -1,0 +1,12 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+  <view class="user">
+    <label>用户名：</label>
+    <input placeholder="请输入用户名" bindinput='getUser'></input>
+  </view>
+  <view class="password">
+    <label>密码：</label>
+    <input placeholder="请输入密码" bindinput='getPassword'></input>
+  </view>
+   <button type="primary" plain="true" class="button" bindtap='Login'>按钮</button>
+</view>

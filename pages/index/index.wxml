@@ -1,0 +1,38 @@
+<!--首页-->
+<!-- 组件引入 -->
+<header  my-property="施工地图" ></header>
+<view class="container">
+  <view class="status">
+    <view class="status-item">
+      <text>已完成：</text>
+      <image src="../../images/red.png" class="status-icon"></image>
+    </view>
+     <view class="status-item">
+      <text>建设中：</text>
+      <image src="../../images/blue.png" class="status-icon"></image>
+    </view>
+     <view class="status-item">
+      <text>潜在：</text>
+      <image src="../../images/yellow.png" class="status-icon"></image>
+    </view>
+  </view>
+
+  <!-- <view class="section">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">
+        当前选择：{{array[index]}}
+      </view>
+    </picker>
+  </view> -->
+<!-- longitude='111.286331' 
+    latitude='30.69178'  -->
+  <map id="map"  scale="{{scale}}" 
+    longitude='{{longitude}}' 
+    latitude='{{latitude}}' 
+    markers="{{markers}}"   
+    bindmarkertap="markertap" 
+    show-location 
+    style="width: 100%; height: 100%;"
+  ></map>
+
+</view>

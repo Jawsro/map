@@ -1,0 +1,46 @@
+/**index.wxss**/
+.container{
+  position: absolute;
+  top:150rpx ;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+.status{
+  display: flex;
+  padding: 40rpx 0;
+}
+.status-item{
+  flex:1;
+  display: flex;
+  justify-content: left;
+  padding-left:40rpx
+}
+.status-icon{
+  width:40rpx;
+  height:40rpx
+}
+.section{
+  margin-bottom:30rpx;
+  padding-left:80rpx
+}
