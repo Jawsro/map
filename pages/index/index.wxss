@@ -1,40 +1,56 @@
-/**index.wxss**/
 .container{
   position: absolute;
-  top:150rpx ;
+  top:0rpx;
   left: 0;
   right: 0;
   bottom: 0;
-}
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
+  
 }
 .status{
   display: flex;
-  padding: 40rpx 0;
+  width: 100%;
+  align-items: center;
+  padding: 20rpx 0rpx;
 }
 .status-item{
-  flex:1;
+  flex:0 0 28%;
+  margin-left:4%;
+  width: 28%;
+  height: 62rpx;
+}
+.item{
   display: flex;
-  justify-content: left;
-  padding-left:40rpx
+  justify-content: center;
+  align-items: center;
+  border-radius: 40rpx;
+  padding: 4rpx 2rpx;
+  
+}
+.noselect{
+  color:#606262;
+}
+.select-active{
+  font-weight: 600;
+  border: 2rpx solid #3A66A8;
+}
+.search-box{
+  position: absolute;
+  top:130rpx ;
+  left: 30rpx;
+  right: 30rpx;
+  z-index: 9;
+}
+.search{
+  padding:20rpx;
+  background-color: #fff;
+  display: flex;
+}
+.search-input{
+  flex: 1;
+}
+.icon{
+  flex: 0 0 30rpx;
+
 }
 .status-icon{
   width:40rpx;
@@ -43,4 +59,89 @@
 .section{
   margin-bottom:30rpx;
   padding-left:80rpx
+}
+.msg-box{
+  background-color: #EFEFEF;
+  border-top-left-radius: 50rpx;
+  border-top-right-radius: 50rpx;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 30rpx 20rpx 30rpx rgba(0,0,0,0.3);
+}
+.box-top{
+  background-color: #fff;
+  padding-bottom:30rpx;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+}
+.shouqi{
+  text-align: center;
+}
+
+.project{
+  padding: 0 20rpx;
+}
+.project-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.title{
+  flex: 1;
+}
+.project-status{
+  background-color: #DE6D6B;
+  color: #fff;
+  border-radius: 10rpx;
+  padding: 2rpx 5rpx;
+}
+.close{
+  flex: 0 0 190rpx;
+  width: 190rpx;
+  height: 64rpx;
+  margin-right: 60rpx;
+  text-align: right;
+}
+.daohang{
+  border: 4rpx solid #3A66A8;
+  border-radius: 40rpx;
+  padding: 4rpx 5rpx;
+  width: 190rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.project-details{
+  margin-top: 20rpx;
+  background-color: #fff;
+  padding: 20rpx 20rpx 40rpx;
+}
+.project-details-item{
+  margin-top: 20rpx;
+}
+.all-style{
+  background-color: #EFEFEF;
+  border-radius: 20rpx;
+  padding:10rpx 20rpx;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+.phone{
+  color: #45BAE3;
+  border-bottom: 2rpx #45BAE3 dashed;
+}
+.classification{
+  display: flex;
+  margin-top: 20rpx;
+}
+.classification-item{
+  width: 24%;
+  margin-right: 10rpx;
+  background-color: #EFEFEF;
+  border-radius: 20rpx;
+  padding:10rpx 20rpx 50rpx;
+
 }

@@ -1,5 +1,4 @@
 {
-  "usingComponents": {
-    "header":"../../components/title/title"
-  }
+  "usingComponents": {},
+  "navigationBarTitleText":"施工地图"
 }

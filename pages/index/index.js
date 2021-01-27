@@ -10,15 +10,37 @@ Page({
     latitude:30.69178,
     scale:15,
     markers: [],
+    zhedie:false,
+    msgBoxIsShow:true,
+    daohangLongitude:'',
+    daohangLatitude:'',
+    daohangAddress:'',
+    statusList:[
+      {text:"完成区域",icon:'icon-xingxing',color:'#DE6D6B',checked: false},
+      {text:"施工区域",icon:'icon-GIS-TL_weixiudian-',color:'#000',checked: false},
+      {text:"潜在区域",icon:'icon-wenhao',color:'#E89024',checked: false}
+    ],
+    selectCss:false
   },
   /**
    * 
    * 生命周期
    */
+  openMsgBox(){
+    this.setData({
+      zhedie:true
+    })
+    console.log(11111)
+  },
+  closeMsgBox(){
+    this.setData({
+      zhedie:false
+    })
+  },
   onLoad: function () {
     let that = this;
-    that.getUserLocation()
-   // that.getLocationMap()
+   // that.getUserLocation()
+   that.getLocationMap()
   },
   onReady: function(e) {
   },
@@ -30,7 +52,7 @@ Page({
     let that = this
     wx.getSetting({
       success (res) {
-        console.log(res)
+        // console.log(res)
         //判断是否有地位权限
         if(!res.authSetting['scope.userLocation']){
           //没有权限
@@ -71,7 +93,7 @@ Page({
     wx.getLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
       success (res) {
-        console.log(res.longitude)
+        // console.log(res.longitude)
         const latitude = res.latitude
         const longitude = res.longitude
         let marker = that. _createMarker(res);
@@ -82,7 +104,7 @@ Page({
         })
       },
     })
-    console.log(that.longitude)
+    // console.log(that.longitude)
   },
   getHospitalMarkers() {
     let that=this
@@ -201,7 +223,27 @@ Page({
     };
     return marker;
   },
-  
+  getDaoHang(){
+    let that = this
+    console.log(that.daohangLatitude,that.daohangLongitude)
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success (res) {
+        // const latitude = res.latitude
+        // const longitude = res.longitude
+        wx.openLocation({
+          latitude:Number( that.daohangLatitude),
+          longitude:Number(that.daohangLongitude),
+          scale: 18,
+          address:that.daohangAddress,
+          success: function (r) {
+            console.log(r)
+          }
+        })
+      }
+    })  
+
+  },
   //点击标记点时触发，调起导航
   markertap(e) {
     let that = this;
@@ -214,24 +256,40 @@ Page({
         address = item.address
         goLatitude = item.latitude
         goLongitude = item.longitude
+        that.daohangLongitude = item.longitude
+        that.daohangLatitude = item.latitude
+        that.daohangAddress = item.address
+        console.log(item.latitude,item.longitude)
       }
     })
-    wx.getLocation({
-    type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success (res) {
-        // const latitude = res.latitude
-        // const longitude = res.longitude
-        wx.openLocation({
-          latitude:Number(goLatitude),
-          longitude:Number(goLongitude),
-          scale: 18,
-          address:address,
-          success: function (r) {
-            console.log(r)
-          }
-        })
-      }
-    })  
+    that.setData({
+      msgBoxIsShow:false
+    })
   },
-  
+  MsgBoxNoShow(){
+    this.setData({
+      msgBoxIsShow:true
+    })
+  },
+  select(e){
+    // if(this.selectCss){
+    //   this.selectCss =false;
+    //   this.setData({
+    //     selectCss:false
+    //   })
+    //   console.log(1)
+    // }else{
+    //   this.selectCss =true;
+    //   this.setData({
+    //     selectCss:true
+    //   })
+    //   console.log(2)
+    // }
+    let index = e.currentTarget.dataset.index
+    let bool = this.data.statusList[index].checked
+    this.setData({
+      ['statusList[' + index + '].checked']: !bool
+    })
+    console.log(e)
+  }
 })
