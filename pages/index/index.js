@@ -17,20 +17,24 @@ Page({
     daohangAddress:'',
     statusList:[
       {text:"完成区域",icon:'icon-xingxing',color:'#DE6D6B',checked: false},
-      {text:"施工区域",icon:'icon-GIS-TL_weixiudian-',color:'#000',checked: false},
+      {text:"施工区域",icon:'icon-GIS-TL_weixiudian-',color:'#1359E5',checked: false},
       {text:"潜在区域",icon:'icon-wenhao',color:'#E89024',checked: false}
     ],
-    selectCss:false
+    phone:'13872675891'
   },
   /**
    * 
    * 生命周期
    */
+  callMe(){
+    wx.makePhoneCall({
+      phoneNumber: this.data.moblie,
+    })
+  },
   openMsgBox(){
     this.setData({
       zhedie:true
     })
-    console.log(11111)
   },
   closeMsgBox(){
     this.setData({
@@ -39,10 +43,12 @@ Page({
   },
   onLoad: function () {
     let that = this;
-   // that.getUserLocation()
-   that.getLocationMap()
+    that.getUserLocation()
+   //that.getLocationMap()
   },
   onReady: function(e) {
+    var version = wx.getSystemInfoSync().SDKVersion;
+    console.log("版本号: " + version);
   },
   /**
    * 
@@ -52,32 +58,32 @@ Page({
     let that = this
     wx.getSetting({
       success (res) {
-        // console.log(res)
         //判断是否有地位权限
-        if(!res.authSetting['scope.userLocation']){
-          //没有权限
-          wx.showModal({
-            title: '提示',
-            content: '请求获取位置权限',
-            success (res) {
-              if(res.confirm == false){
-                return false
-              }
-              wx.openSetting({
-                success (res) {
-                  //如果再次拒绝则返回页面并提示
-                  if (!res.authSetting['scope.userLocation']) {
-                    wx.showToast({
-                    title: '此功能需获取位置信息，请重新设置',
-                    duration: 3000,
-                    icon: 'none'
+        if(!res.authSetting['scope.userLocation']){//没有权限
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              // 用户已经同意
+              //其他操作...
+              console.log("用户已经同意位置授权");
+            },
+            fail(){
+              console.log("用户已经拒绝位置授权");
+              //如果拒绝，在这里进行再次获取授权的操作
+              wx.showModal({
+                content: '检测到您没打开此小程序的定位权限，是否去设置打开？',
+                confirmText: "确认",
+                success: function (res) {
+                  console.log(res);
+                  //点击“确认”时打开设置页面
+                  if (res.confirm) {
+                    console.log('用户点击确认')
+                    wx.openSetting({
+                      success: (res) => {  that.getLocationMap()}
                     })
-                  }else{
-                    //允许授权后，调用地图
-                    that.getLocationMap()
                   }
-                },
-              })
+                }
+              });
             }
           })
         }else{
@@ -93,7 +99,6 @@ Page({
     wx.getLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
       success (res) {
-        // console.log(res.longitude)
         const latitude = res.latitude
         const longitude = res.longitude
         let marker = that. _createMarker(res);
@@ -104,7 +109,6 @@ Page({
         })
       },
     })
-    // console.log(that.longitude)
   },
   getHospitalMarkers() {
     let that=this
@@ -114,14 +118,14 @@ Page({
         "name": "楠海花园6-2",
         "longitude": "111.316101",
         "latitude": "30.699499",
-        'iconPath': "../../images/blue.png",
+        'iconPath': "../../images/qianzai.png",
         "address":"高新区楠海花园小区"
     }, {
         "id": 2,
         "name": "国土资源局小区2幢5单元",
         "longitude": "111.281258",
         "latitude": "30.711201",
-        'iconPath':  "../../images/red.png",
+        'iconPath':  "../../images/shigong.png",
         "address":"西陵区北门外正街"
 
     },{
@@ -129,56 +133,56 @@ Page({
         "name": "中心医院7-3",
         "longitude": " 111.284698",
         "latitude": "30.7031",
-        "iconPath": "../../images/yellow.png",
+        "iconPath": "../../images/wancheng.png",
         "address":"伍家岗区宜昌市中心医院"
     },{
       "id": 4,
       "name": "楠海花园3-4",
       "longitude": "111.316101",
       "latitude": "30.699499",
-      "iconPath": "../../images/yellow.png",
+      "iconPath": "../../images/qianzai.png",
       "address":"高新区楠海花园小区"
     },{
       "id":5,
       "name": "夷陵大道116号1单元",
       "longitude": " 111.29955",
       "latitude": "30.68779",
-      "iconPath": "../../images/red.png",
+      "iconPath": "../../images/wancheng.png",
       "address":"西陵区夷陵大道116号"
     },{
       "id": 6,
       "name": "葛洲坝中心医院14幢4单元",
       "longitude": "111.286583",
       "latitude": "30.71846",
-      "iconPath": "../../images/blue.png",
+      "iconPath": "../../images/qianzai.png",
       "address":"西陵区葛洲坝中心医院"
       },{
       "id": 7,
       "name": "世纪花园7（G）-5",
       "longitude": " 111.298981",
       "latitude": "30.689486",
-      "iconPath": "../../images/yellow.png",
+      "iconPath": "../../images/wancheng.png",
       "address":"伍家岗区世纪花园小区"
     },{
       "id": 8,
       "name": "广场路4-3",
       "longitude": "111.29491",
       "latitude": "30.70157",
-      "iconPath": "../../images/blue.png",
+      "iconPath": "../../images/shigong.png",
       "address":"西陵区广场路4号"
     },{
       "id": 9,
       "name": "胜利三路33号7-1",
       "longitude": "111.30627",
       "latitude": "30.68904",
-      "iconPath": "../../images/blue.png",
+      "iconPath": "../../images/shigong.png",
       "address":"西陵区胜利三路33号"
     },{
       "id": 10,
       "name": "三峡大学主东13-1",
       "longitude": "111.3174",
       "latitude": "30.72272",
-      "iconPath": "../../images/blue.png",
+      "iconPath": "../../images/shigong.png",
       "address":"西陵区三峡大学主东小区"
     }
   ]
@@ -229,8 +233,6 @@ Page({
     wx.getLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
       success (res) {
-        // const latitude = res.latitude
-        // const longitude = res.longitude
         wx.openLocation({
           latitude:Number( that.daohangLatitude),
           longitude:Number(that.daohangLongitude),
@@ -272,24 +274,10 @@ Page({
     })
   },
   select(e){
-    // if(this.selectCss){
-    //   this.selectCss =false;
-    //   this.setData({
-    //     selectCss:false
-    //   })
-    //   console.log(1)
-    // }else{
-    //   this.selectCss =true;
-    //   this.setData({
-    //     selectCss:true
-    //   })
-    //   console.log(2)
-    // }
     let index = e.currentTarget.dataset.index
     let bool = this.data.statusList[index].checked
     this.setData({
       ['statusList[' + index + '].checked']: !bool
     })
-    console.log(e)
   }
 })

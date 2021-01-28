@@ -1,6 +1,4 @@
 <!--首页-->
-<!-- 组件引入 -->
-<!-- <header  my-property="施工地图" ></header> -->
 <view class="container">
   <view class="status">
     <view class="status-item" wx:for="{{statusList}}" wx:key='index' bindtap="select" data-index="{{index}}">
@@ -30,8 +28,9 @@
     longitude='{{longitude}}' 
     latitude='{{latitude}}' 
     markers="{{markers}}"   
-    bindmarkertap="markertap" 
-    show-location 
+    bindmarkertap="markertap"
+    enable-poi="false"  
+    enable-building="false"
     style="width: 100%; height: 100%;"
   ></map>
 
@@ -82,7 +81,7 @@
         </view>
         <view class="person all-style">
           <text class="margin-right-10">孟凡清</text>
-          <text class="phone">13872675891</text>
+          <text class="phone" bindtap="callMe">{{phone}}</text>
         </view>
         <view class="classification">
           <view class="classification-item">
