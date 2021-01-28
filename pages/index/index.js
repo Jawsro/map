@@ -47,8 +47,6 @@ Page({
    //that.getLocationMap()
   },
   onReady: function(e) {
-    var version = wx.getSystemInfoSync().SDKVersion;
-    console.log("版本号: " + version);
   },
   /**
    * 
