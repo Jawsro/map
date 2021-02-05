@@ -63,21 +63,19 @@ Page({
             success() {
               // 用户已经同意
               //其他操作...
-              console.log("用户已经同意位置授权");
+              that.getLocationMap()
             },
             fail(){
-              console.log("用户已经拒绝位置授权");
               //如果拒绝，在这里进行再次获取授权的操作
               wx.showModal({
-                content: '检测到您没打开此小程序的定位权限，是否去设置打开？',
+                content: '检测到您没打开此小程序的定位权限，请先授此权限！',
                 confirmText: "确认",
+                showCancel:false,
                 success: function (res) {
-                  console.log(res);
                   //点击“确认”时打开设置页面
                   if (res.confirm) {
-                    console.log('用户点击确认')
                     wx.openSetting({
-                      success: (res) => {  that.getLocationMap()}
+                      success: (res) => {that.getLocationMap()}
                     })
                   }
                 }
